@@ -10,7 +10,6 @@
         "nodes" : {
             "type" : "array",
             "description" : "The list of nodes in the knowledge graph",
-            "minItems": 2,
             "uniqueItems": true,
             "additionalItems": true,
             "items": {
@@ -63,8 +62,8 @@
                             },
                             "sab" : {
                                 "type" : "string",
-                                "pattern" : "[^:]",
-                                "$comment" : "Regex pattern for no colon in string",
+                                "pattern" : "^[a-zA-Z0-9\\._-]+$",
+                                "$comment" : "Regex pattern for the prefix of a CURIE-like format",
                                 "description" : "This is the source abbreviation of the Source in which this node is asserted. It is requred for all nodes except for Term nodes."
                             },
                             "def" : {
@@ -95,9 +94,9 @@
                                     "properties" : {
                                         "id" : {
                                             "type" : "string",
-                                            "pattern" : ".*:.*",
-                                            "$comment" : "regex for a CURIE (contains a colon in the middle)",
-                                            "description" : "The unique id of the node used for relationships. For Terms this is any string (in else below). For all other node types (labels) this is a CURIE like Source:Code."
+                                            "pattern" : "^[a-zA-Z0-9\\._-]+:[a-zA-Z0-9\\._-]+$",
+                                            "$comment" : "regex for a CURIE-like pattern",
+                                            "description" : "The unique id of the node used for relationships. For Terms this is a string without this pattern (in else below). For all other node types (labels) this is a CURIE like Source:Code."
                                         }
                                     }
                                 }
@@ -109,7 +108,10 @@
                                     "required" : ["id"],
                                     "properties" : {
                                         "id" : {
-                                            "type" : "string"
+                                            "type" : "string",
+                                            "not" : {
+                                                "pattern" : "^[a-zA-Z0-9\\._-]+:[a-zA-Z0-9\\._-]+$"
+                                            }
                                         }
                                     }
                                 }
@@ -197,7 +199,6 @@
         "rels" : {
             "type" : "array",
             "description" : "The list of relationships in the knowledge graph",
-            "minItems": 1,
             "uniqueItems": true,
             "items": {
                 "type": "object",
@@ -223,8 +224,8 @@
                                 "properties" : {
                                     "id" : {
                                         "type" : "string",
-                                        "pattern" : ".*:.*",
-                                        "$comment" : "regex for a CURIE (contains a colon in the middle)",
+                                        "pattern" : "^[a-zA-Z0-9\\._-]+:[a-zA-Z0-9\\._-]+$",
+                                        "$comment" : "regex for a CURIE-like pattern",
                                         "description" : "This is the id (CURIE) of the subject node of the relationship."
                                     }
                                 }
@@ -254,17 +255,17 @@
                         "properties" : {
                             "sab" : {
                                 "type" : "string",
-                                "pattern" : "[^:]",
+                                "pattern" : "^[a-zA-Z0-9\\._-]+$",
                                 "description" : "This is the source abbreviation of the source from which this relationship is asserted."
                             },
                             "def" : {
-                                "type" : "string",
+                                "type" : ["string", "null"],
                                 "description" : "This is a definition of the Concept node when relationship type label is CODE."
                             },
                             "codeid" : {
                                 "type" : "string",
-                                "pattern" : ".*:.*",
-                                "description" : "This is a CURIE for a Code from a Source as sab:code, typiclly a equivalence class of the Concept id (dbxref) of the Concept node when relationship type label is CODE."
+                                "pattern" : "^[a-zA-Z0-9\\._-]+:[a-zA-Z0-9\\._-]+$",
+                                "description" : "This is a CURIE-like pattern for a Code from a Source as sab:code, typiclly a equivalence class of the Concept node id (dbxref) when relationship type label is CODE."
                             },
                             "tty" : {
                                 "type" : "string",
@@ -296,11 +297,13 @@
                             }
                         },
                         "$comment" : "The lines below ensure that if the value-related items are used the attribute is also present.",
-                        "dependentRequired": { "valuestr" : [ "attribute" ] },
-                        "dependentRequired": { "value" : [ "attribute" ] },
-                        "dependentRequired": { "upperbound" : [ "attribute" ] },
-                        "dependentRequired": { "lowerbount" : [ "attribute" ] },
-                        "dependentRequired": { "unit" : [ "attribute" ] }
+                        "dependentRequired": { 
+                            "valuestr" : [ "attribute" ],
+                            "value" : [ "attribute" ],
+                            "upperbound" : [ "attribute" ],
+                            "lowerbount" : [ "attribute" ],
+                            "unit" : [ "attribute" ]
+                        }
                     }
                 },
                 "if": {
@@ -319,7 +322,9 @@
                                     "properties" : {
                                         "id" : {
                                             "type" : "string",
-                                            "description" : "This is the id (CURIE or Term when CODE relationship) of the object node of the relationship."
+                                            "not" : {
+                                                "pattern" : "^[a-zA-Z0-9\\._-]+:[a-zA-Z0-9\\._-]+$"},
+                                            "description" : "This is the id (Term not CURIE when CODE relationship) of the object node of the relationship."
                                         }
                                     }
                                 }
@@ -338,8 +343,8 @@
                                     "properties" : {
                                         "id" : {
                                             "type" : "string",
-                                            "pattern" : ".*:.*",
-                                            "description" : "This is the id (CURIE or Term when CODE relationship) of the object node of the relationship."
+                                            "pattern" : "^[a-zA-Z0-9\\._-]+:[a-zA-Z0-9\\._-]+$",
+                                            "description" : "This is the id (CURIE when not CODE relationship) of the object node of the relationship."
                                         }
                                     }
                                 }
