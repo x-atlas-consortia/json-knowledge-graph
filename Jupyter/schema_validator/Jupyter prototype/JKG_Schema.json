@@ -218,7 +218,7 @@
                         "properties" : {
                             "properties" : {
                                 "type" : "object",
-                                "descriptoin" : "These are the ingested properties of the start node.",
+                                "description" : "These are the ingested properties of the start node.",
                                 "required" : [ "id" ],
                                 "additionalProperties": true,
                                 "properties" : {
@@ -240,7 +240,7 @@
                         "properties" : {
                             "properties" : {
                                 "type" : "object",
-                                "descriptoin" : "These are the ingested properties of the end node.",
+                                "description" : "These are the ingested properties of the end node.",
                                 "required" : [ "id" ],
                                 "additionalProperties": true,
                                 "properties" : {
