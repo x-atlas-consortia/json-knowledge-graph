@@ -1,3 +1,30 @@
+## Table of Contents
+
+- [JSON Knowledge Graph (JKG)](#json-knowledge-graph-jkg)
+- [JKG JSON](#jkg-json)
+- [Features of JKG](#features-of-jkg)
+  - [Platform-independence](#platform-independence)
+  - [Self-containment](#self-containment)
+  - [Validation](#validation)
+- [JKG data model](#jkg-data-model)
+  - [Entities](#entities)
+    - [concept](#concept)
+    - [code](#code)
+    - [term](#term)
+  - [Relationships](#relationships)
+    - [concept-term (code)](#concept-term-code)
+    - [concept-concept](#concept-concept)
+- [JKG objects](#jkg-objects)
+  - [node objects](##node-objects)
+    - [Source](#source)
+    - [Node_Label](#node_label)
+    - [Rel_Label](#rel_label)
+    - [Concept](#concept)
+    - [Term](#term)
+  - [rel objects](#rel-objects)
+    - [concept-code](#coderel-concept-term-rel-objects)
+    - [concept-concept](#concept-concept-rel-objects)
+
 # JSON Knowledge Graph (JKG)
 **JSON Knowledge Graph (JKG)** is a JSON specification for working with 
 general knowledge graphs--specifically, property graphs.
@@ -12,7 +39,7 @@ discrete, encoded biomedical data. However, the JKG should support
 knowledge graphs of any data that can be represented as _assertions_ involving _triplets_--i.e., 
 statements that link entities through relationships in format 
 
-**_subject_** _predicate_ **_object_**.
+**_subject_** _predicate_ **_object_**
 
 # JKG JSON
 A **JKG JSON** is a JSON file that conforms to the JKG specification.
@@ -115,7 +142,7 @@ relationship with the concept linked to the code for UBERON:0006544.
 
 # JKG objects
 
-# node objects
+## node objects
 
 JKG features two basic types of node objects:
 * _Entity node objects_ that correspond directly to entities in the JKG data model.
@@ -232,7 +259,7 @@ The SAB of the source
         }
     }
 ```
-### Rel_Label
+## Rel_Label
 A Rel_Label reference node object describes a string used as a label for a relationship.
 
 Keys of Rel_Label node objects include:
