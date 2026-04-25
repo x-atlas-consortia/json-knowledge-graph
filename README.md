@@ -22,7 +22,7 @@
     - [Concept](#concept)
     - [Term](#term)
   - [rel objects](#rel-objects)
-    - [concept-code](#coderel-concept-term-rel-objects)
+    - [concept-code (coderel)](#coderel-concept-term-rel-objects)
     - [concept-concept](#concept-concept-rel-objects)
 
 # JSON Knowledge Graph (JKG)
