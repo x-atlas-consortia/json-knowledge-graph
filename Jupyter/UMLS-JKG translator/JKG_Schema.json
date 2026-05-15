@@ -94,7 +94,7 @@
                                     "properties" : {
                                         "id" : {
                                             "type" : "string",
-                                            "pattern" : "^[a-zA-Z0-9\\._-]+:[a-zA-Z0-9\\._-]+$",
+                                            "pattern" : "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$",
                                             "$comment" : "regex for a CURIE-like pattern",
                                             "description" : "The unique id of the node used for relationships. For Terms this is a string without this pattern (in else below). For all other node types (labels) this is a CURIE like Source:Code."
                                         }
@@ -110,7 +110,8 @@
                                         "id" : {
                                             "type" : "string",
                                             "not" : {
-                                                "pattern" : "^[a-zA-Z0-9\\._-]+:[a-zA-Z0-9\\._-]+$"
+
+                                                "pattern" : "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$"
                                             }
                                         }
                                     }
@@ -218,7 +219,7 @@
                         "properties" : {
                             "properties" : {
                                 "type" : "object",
-                                "descriptoin" : "These are the ingested properties of the start node.",
+                                "description" : "These are the ingested properties of the start node.",
                                 "required" : [ "id" ],
                                 "additionalProperties": true,
                                 "properties" : {
@@ -240,10 +241,17 @@
                         "properties" : {
                             "properties" : {
                                 "type" : "object",
-                                "descriptoin" : "These are the ingested properties of the end node.",
+                                "description" : "These are the ingested properties of the end node.",
                                 "required" : [ "id" ],
                                 "additionalProperties": true,
                                 "properties" : {
+                                    "id" : {
+                                        "type" : "string",
+                                        "pattern": "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$",
+                                        "$comment" : "regex for a CURIE-like pattern",
+                                        "description" : "This is the id (CURIE) of the object node of the relationship."
+                                    }
+                     
                                 }
                             }
                         }
@@ -323,7 +331,8 @@
                                         "id" : {
                                             "type" : "string",
                                             "not" : {
-                                                "pattern" : "^[a-zA-Z0-9\\._-]+:[a-zA-Z0-9\\._-]+$"},
+                                                "pattern" : "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$"
+                                            },
                                             "description" : "This is the id (Term not CURIE when CODE relationship) of the object node of the relationship."
                                         }
                                     }
@@ -343,7 +352,7 @@
                                     "properties" : {
                                         "id" : {
                                             "type" : "string",
-                                            "pattern": "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$",
+                                            "pattern" : "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$",
                                             "description" : "This is the id (CURIE when not CODE relationship) of the object node of the relationship."
                                         }
                                     }
