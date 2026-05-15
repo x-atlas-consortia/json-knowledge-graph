@@ -227,7 +227,7 @@
                                         "type" : "string",
                                         "pattern": "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$",
                                         "$comment" : "regex for a CURIE-like pattern",
-                                        "description" : "This is the id (CURIE) of the subject node of the relationship."
+                                        "description" : "This is the id (CURIE) of the subject node (Concept) of the relationship."
                                     }
                                 }
                             }
@@ -241,15 +241,13 @@
                         "properties" : {
                             "properties" : {
                                 "type" : "object",
-                                "description" : "These are the ingested properties of the end node.",
+                                "description" : "These are the ingested properties of the base end node.",
                                 "required" : [ "id" ],
                                 "additionalProperties": true,
                                 "properties" : {
                                     "id" : {
                                         "type" : "string",
-                                        "pattern": "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$",
-                                        "$comment" : "regex for a CURIE-like pattern",
-                                        "description" : "This is the id (CURIE) of the object node of the relationship."
+                                        "description" : "This is the id of the base object node of the relationship."
                                     }
                      
                                 }
@@ -272,7 +270,7 @@
                             },
                             "codeid" : {
                                 "type" : "string",
-                                "pattern": "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$",
+                                "pattern": "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+$",
                                 "description" : "This is a CURIE-like pattern for a Code from a Source as sab:code, typically an equivalence class of the Concept node id (dbxref) when relationship type label is CODE."
                             },
                             "tty" : {
@@ -295,7 +293,7 @@
                                 "type" : "number",
                                 "description" : "This is a numeric upper bound for a range type of value for an attribute."
                             },
-                            "lowerbount" : {
+                            "lowerbound" : {
                                 "type" : "number",
                                 "description" : "This is a numeric lower bound for a range type of value for an attribute."
                             },
@@ -333,7 +331,7 @@
                                             "not" : {
                                                 "pattern" : "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$"
                                             },
-                                            "description" : "This is the id (Term not CURIE when CODE relationship) of the object node of the relationship."
+                                            "description" : "This is the id of the object node of the relationship. For CODE relationships, the id is for a Term node."
                                         }
                                     }
                                 }
@@ -353,7 +351,7 @@
                                         "id" : {
                                             "type" : "string",
                                             "pattern" : "^[A-Za-z0-9._-]+:[A-Za-z0-9._-]+(?: CUI)?$",
-                                            "description" : "This is the id (CURIE when not CODE relationship) of the object node of the relationship."
+                                            "description" : "This is the id of the object node of the relationship. For non-CODE relationships, the id is CURIE-like for a Concept node."
                                         }
                                     }
                                 }
